@@ -9,8 +9,8 @@ import numpy as np
 config = {
     'batch_size': 64,
     'image_size': (50,50),
-    'epochs': 1024,
-    'optimizer': keras.optimizers.experimental.SGD(1e-3)
+    'epochs': 20,
+    'optimizer': keras.optimizers.experimental.Adam(5e-4)
 }
 ###########################MAGIC ENDS  HERE##########################
 
@@ -58,9 +58,17 @@ def build_model(input_shape, num_classes):
     # Use Keras API like `x = layers.XXX()(x)`
     # Hint: Use a Deeper network (i.e., more hidden layers, different type of layers)
     # and different combination of activation function to achieve better result.
-    hidden_units = 16
+    hidden_units = 64
+    x = layers.Conv2D(64, activation='relu', kernel_size=(3, 3), input_shape=input_shape)(x)
+    x = layers.MaxPooling2D(pool_size=2, strides=1, padding='same')(x)
+    x = layers.Conv2D(64, activation='relu', kernel_size=(3, 3), input_shape=input_shape)(x)
+    x = layers.MaxPooling2D(pool_size=2, strides=1, padding='same')(x)
     x = layers.Flatten()(x)
     x = layers.Dense(hidden_units, activation='relu')(x)
+    # x = layers.Dense(hidden_units, activation='relu')(x)
+    # x = layers.Dense(hidden_units, activation='relu')(x)
+
+
 
     ###########################MAGIC ENDS HERE##########################
     outputs = layers.Dense(num_classes, activation="softmax", kernel_initializer='he_normal')(x)
