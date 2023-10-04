@@ -8,8 +8,8 @@ import numpy as np
 # Change the hyper-parameters to get the model performs well
 config = {
     'batch_size': 64,
-    'image_size': (50,50),
-    'epochs': 20,
+    'image_size': (100,100),
+    'epochs': 100,
     'optimizer': keras.optimizers.experimental.Adam(5e-4)
 }
 ###########################MAGIC ENDS  HERE##########################
