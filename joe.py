@@ -7,10 +7,10 @@ import numpy as np
 ###########################MAGIC HAPPENS HERE##########################
 # Change the hyper-parameters to get the model performs well
 config = {
-    'batch_size': 128,
-    'image_size': (100,100),
-    'epochs': 50,
-    'optimizer': keras.optimizers.experimental.Adam(5e-4)
+    'batch_size': 128,      # Batch size increased to 128
+    'image_size': (100,100),# Image size increased to 100x100
+    'epochs': 50,           # Epochs increased to 50
+    'optimizer': keras.optimizers.experimental.Adam(5e-4) # Switched to Adam wiht 5e-4
 }
 ###########################MAGIC ENDS  HERE##########################
 
@@ -37,9 +37,9 @@ def data_processing(ds):
             # Use dataset augmentation methods to prevent overfitting, 
             layers.RandomFlip("horizontal"),
             layers.RandomRotation(0.3),
-            layers.RandomZoom(0.3),
-            layers.RandomTranslation(height_factor=0.3, width_factor=0.3),
-            layers.RandomContrast(0.3)
+            layers.RandomZoom(0.3), # Added RandomZoom(0.3)
+            layers.RandomTranslation(height_factor=0.3, width_factor=0.3), # Added RandomTranslation(0.3)
+            layers.RandomContrast(0.3) # Added RandomContrast(0.3)
             ###########################MAGIC ENDS HERE##########################
         ]
     )
@@ -58,7 +58,8 @@ def build_model(input_shape, num_classes):
     # Use Keras API like `x = layers.XXX()(x)`
     # Hint: Use a Deeper network (i.e., more hidden layers, different type of layers)
     # and different combination of activation function to achieve better result.
-    hidden_units = 128
+    hidden_units = 128 # Increased units to 128
+    # Added conv and pooling layers
     x = layers.Conv2D(128, activation='relu', kernel_size=(3, 3), input_shape=input_shape)(x)
     x = layers.MaxPooling2D(pool_size=2, strides=2, padding='same')(x)
     x = layers.Conv2D(128, activation='relu', kernel_size=(3, 3), input_shape=input_shape)(x)
@@ -109,6 +110,6 @@ if __name__ == '__main__':
     # 3. Visualize three misclassified images
     # Hint: Use the test_images array to generate the misclassified images using matplotlib
 
-    # model.save("best_trained_model.keras")
+    model.save("best_trained_model.keras")
 
     ###########################MAGIC HAPPENS HERE##########################
